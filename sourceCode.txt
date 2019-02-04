@@ -1,0 +1,157 @@
+import java.io.*;
+import java.util.*;
+public class DriverCurlyBracket{
+   public static void main(String [] args){
+
+       curlyBracket s = new curlyBracket();  
+      try{        
+
+        FileInputStream fstream = new FileInputStream("rainbow.txt");
+        DataInputStream in = new DataInputStream(fstream);
+        BufferedReader br = new BufferedReader(new InputStreamReader(in));
+        String strLine;       
+        HashMap <String, Integer> counts = new HashMap<String, Integer>(); 
+        HashMap <String, Integer> location = new HashMap<String, Integer>(); 
+        ArrayList<String> lines= new ArrayList<String>();
+        ArrayList<String> varList= new ArrayList<String>();
+        ArrayList<String> txt= new ArrayList<String>();   
+        while ((strLine = br.readLine()) != null)   {
+            //System.out.println(strLine);
+            txt.add(strLine);
+            s.match(lines, strLine);   
+        }
+        System.out.println(txt);    
+        System.out.println(lines);
+        s.variableList(varList, lines);
+        System.out.println(varList);
+        s.unusedVar(varList, txt, counts,location);
+        System.out.println(counts);
+        System.out.println(location);
+        s.display(counts, location);
+        in.close();        
+
+       }    
+       catch (Exception e){//Catch exception if any
+            System.err.println("Error: " + e.getMessage());
+        }
+        
+   }
+}
+
+#include <iostream>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+float f1(float x, int intensity);
+float f2(float x, int intensity);
+float f3(float x, int intensity);
+float f4(float x, int intensity);
+
+#ifdef __cplusplus
+}
+#endif
+
+int main (int argc, char* argv[]) {
+
+  if (argc < 6) {
+    std::cerr<<"usage: "<<argv[0]<<" <functionid> <a> <b> <n> <intensity>"<<std::endl;
+    return -1;
+}
+
+  // Variables used
+  int functionid = std::atoi(argv[1]);
+  float a = std::atoi(argv[2]);
+  float b = std::atoi(argv[3]);
+  float n = std::atoi(argv[4]);
+  int intensity = std::atoi(argv[5]);
+
+  float x = 0;
+  float step = (float)(b-a)/n;
+  float area = 0;
+
+  //start time
+  clock_t time;
+  float seconds;
+
+  if (functionid == 1){
+    //starts time for f1
+    time = clock();
+    for (int i=0; i<n; i++){
+      x = (float)(a + (i + .5) * step);
+      area += f1(x,intensity);
+    }
+  }
+
+  if (functionid == 2){
+    //starts time for f2
+    time = clock();
+    for (int i=0; i<n; i++){
+      x = (float)(a + (i + .5) * step);
+      area += f2(x,intensity);
+    }
+  }
+
+  if (functionid == 3){
+    //starts time for f3
+    time = clock();
+    for (int i=0; i<n; i++){
+      x = (float)(a + (i + .5) * step);
+      area += f3(x,intensity);
+    }
+  }
+
+  if (functionid == 4){
+    //starts time for f4
+    time = clock();
+    for (int i=0; i<n; i++){
+      x = (float)(a + (i + .5) * step);
+      area += f4(x,intensity);
+    }
+  }
+
+  // multiply the result above by step
+  area = area * step;
+
+  //Gets the end time and vconvert to seconds
+  time = clock() - time;
+  seconds = (((float)time)/CLOCKS_PER_SEC);
+
+// output result and time to std::cout and std::cerr
+  std::cout<< area <<std::endl;
+  std::cerr<< seconds <<std::endl;
+  return 0;
+}
+
+import java.io.*;
+import java.util.*;
+class ifElseStatements 
+{   
+    public ifElseStatements (){
+	}
+	
+    public void match (ArrayList<Integer> ifLocation, ArrayList<Integer> elseLocation, String strLine, int i)
+    {
+           if (strLine.contains("if")&& !strLine.contains("else")&& !strLine.contains("{")){
+               ifLocation.add(i+1);
+             }
+             
+           if ((strLine.contains("else") || strLine.contains("else if"))&& !strLine.contains("{")){
+               elseLocation.add(i+1);
+             }             
+           
+    }   
+    
+    public void report (ArrayList<Integer> ifLocation, ArrayList<Integer> elseLocation)
+    {
+        System.out.println("Below are if/else statement that don't have curly bracket ");
+        System.out.println("If statements on lines:  "+ifLocation);        
+        System.out.println("If statements on lines:  "+elseLocation);
+    }
+    
+}
+   
+   
+   
+     
